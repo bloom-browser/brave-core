@@ -18,6 +18,7 @@
 #include "bat/confirmations/confirmations.h"
 #include "bat/ledger/internal/api/api.h"
 #include "bat/ledger/internal/media/media.h"
+#include "bat/ledger/internal/common/security_helper.h"
 #include "bat/ledger/internal/common/time_util.h"
 #include "bat/ledger/internal/publisher/publisher.h"
 #include "bat/ledger/internal/bat_helper.h"
@@ -428,11 +429,11 @@ void LedgerImpl::SetConfirmationsWalletInfo() {
 
   const auto recovery_seed = braveledger_state::GetRecoverySeed(this);
   const std::vector<uint8_t> seed =
-      braveledger_bat_helper::getHKDF(recovery_seed);
+      braveledger_helper::Security::GetHKDF(recovery_seed);
   std::vector<uint8_t> public_key;
   std::vector<uint8_t> secret_key;
 
-  if (!braveledger_bat_helper::getPublicKeyFromSeed(seed, &public_key,
+  if (!braveledger_helper::Security::GetPublicKeyFromSeed(seed, &public_key,
       &secret_key)) {
     BLOG(0, "Failed to initialize confirmations due to invalid wallet");
     return;
@@ -440,7 +441,8 @@ void LedgerImpl::SetConfirmationsWalletInfo() {
 
   confirmations::WalletInfo wallet_info;
   wallet_info.payment_id = GetPaymentId();
-  wallet_info.private_key = braveledger_bat_helper::uint8ToHex(secret_key);
+  wallet_info.private_key =
+      braveledger_helper::Security::Uint8ToHex(secret_key);
 
   if (!wallet_info.IsValid()) {
     BLOG(0, "Failed to initialize confirmations due to invalid wallet");
@@ -538,10 +540,6 @@ void LedgerImpl::OnRestorePublishers(
     const ledger::Result result,
     ledger::ResultCallback callback) {
   bat_publisher_->OnRestorePublishers(result, callback);
-}
-
-void LedgerImpl::LoadNicewareList(ledger::GetNicewareListCallback callback) {
-  ledger_client_->LoadNicewareList(callback);
 }
 
 void LedgerImpl::GetPublisherInfo(
@@ -917,11 +915,15 @@ void LedgerImpl::GetRewardsInternalsInfo(
   if (seed.size() != SEED_LENGTH) {
     info->is_key_info_seed_valid = false;
   } else {
-    std::vector<uint8_t> secret_key = braveledger_bat_helper::getHKDF(seed);
+    std::vector<uint8_t> secret_key =
+        braveledger_helper::Security::GetHKDF(seed);
     std::vector<uint8_t> public_key;
     std::vector<uint8_t> new_secret_key;
-    info->is_key_info_seed_valid = braveledger_bat_helper::getPublicKeyFromSeed(
-        secret_key, &public_key, &new_secret_key);
+    info->is_key_info_seed_valid =
+        braveledger_helper::Security::GetPublicKeyFromSeed(
+            secret_key,
+            &public_key,
+            &new_secret_key);
   }
 
   callback(std::move(info));

@@ -181,8 +181,6 @@ class LedgerImpl : public ledger::Ledger {
 
   ledger::AutoContributePropertiesPtr GetAutoContributeProperties() override;
 
-  void LoadNicewareList(ledger::GetNicewareListCallback callback);
-
   void SetConfirmationsWalletInfo();
 
   void LoadLedgerState(ledger::OnLoadCallback callback);

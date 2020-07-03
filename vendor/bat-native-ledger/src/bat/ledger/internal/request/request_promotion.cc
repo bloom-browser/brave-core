@@ -69,4 +69,15 @@ std::string GetBatlossURL(
   return BuildUrl(path, PREFIX_V1, ServerTypes::kPromotion);
 }
 
+std::string GetCreateWalletURL() {
+  return BuildUrl("/wallet/brave", PREFIX_V3, ServerTypes::kPromotion);
+}
+
+std::string GetRecoverWalletURL(const std::string& public_key) {
+    const std::string& path = base::StringPrintf(
+      "/wallet/recover/%s",
+      public_key.c_str());
+  return BuildUrl(path, PREFIX_V3, ServerTypes::kPromotion);
+}
+
 }  // namespace braveledger_request_util

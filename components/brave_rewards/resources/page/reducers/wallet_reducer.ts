@@ -72,7 +72,7 @@ const walletReducer: Reducer<Rewards.State | undefined> = (state: Rewards.State,
 
       if (!key || key.length === 0) {
         let ui = state.ui
-        ui.walletRecoverySuccess = false
+        ui.walletRecoverySuccess = 0
 
         state = {
           ...state,

@@ -14,6 +14,7 @@
 #include "base/values.h"
 #include "bat/ledger/global_constants.h"
 #include "bat/ledger/internal/bat_helper.h"
+#include "bat/ledger/internal/common/security_helper.h"
 #include "bat/ledger/internal/ledger_impl.h"
 #include "bat/ledger/internal/legacy/unsigned_tx_properties.h"
 #include "bat/ledger/internal/legacy/unsigned_tx_state.h"
@@ -251,10 +252,11 @@ std::string Wallet::GetClaimPayload(
   header_values.push_back(header_digest);
 
   const auto seed = braveledger_state::GetRecoverySeed(ledger_);
-  std::vector<uint8_t> secret_key = braveledger_bat_helper::getHKDF(seed);
+  std::vector<uint8_t> secret_key =
+      braveledger_helper::Security::GetHKDF(seed);
   std::vector<uint8_t> public_key;
   std::vector<uint8_t> new_secret_key;
-  bool success = braveledger_bat_helper::getPublicKeyFromSeed(
+  bool success = braveledger_helper::Security::GetPublicKeyFromSeed(
       secret_key,
       &public_key,
       &new_secret_key);

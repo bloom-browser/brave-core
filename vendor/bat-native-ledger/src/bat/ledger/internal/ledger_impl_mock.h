@@ -114,8 +114,6 @@ class MockLedgerImpl : public LedgerImpl {
   MOCK_METHOD0(GetAutoContributeProperties,
       ledger::AutoContributePropertiesPtr());
 
-  MOCK_METHOD1(LoadNicewareList, void(ledger::GetNicewareListCallback));
-
   MOCK_METHOD1(SetConfirmationsWalletInfo,
       void(const ledger::WalletInfoProperties&));
 

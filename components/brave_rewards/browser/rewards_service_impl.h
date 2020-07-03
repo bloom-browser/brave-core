@@ -345,7 +345,6 @@ class RewardsServiceImpl : public RewardsService,
                       ledger::Result result);
   void OnLedgerStateLoaded(ledger::OnLoadCallback callback,
                               std::pair<std::string, base::Value> data);
-  void LoadNicewareList(ledger::GetNicewareListCallback callback) override;
   void OnPublisherStateLoaded(ledger::OnLoadCallback callback,
                               const std::string& data);
   void OnGetRewardsParameters(

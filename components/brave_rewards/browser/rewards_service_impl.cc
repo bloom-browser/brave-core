@@ -1005,22 +1005,6 @@ void RewardsServiceImpl::OnPublisherStateLoaded(
       data);
 }
 
-void RewardsServiceImpl::LoadNicewareList(
-  ledger::GetNicewareListCallback callback) {
-  if (!Connected()) {
-    return;
-  }
-
-  std::string data = ui::ResourceBundle::GetSharedInstance().GetRawDataResource(
-      IDR_BRAVE_REWARDS_NICEWARE_LIST).as_string();
-
-  if (data.empty()) {
-    BLOG(0, "Failed to read in niceware list");
-  }
-  callback(data.empty() ? ledger::Result::LEDGER_ERROR
-                        : ledger::Result::LEDGER_OK, data);
-}
-
 void RewardsServiceImpl::LoadURL(
     const std::string& url,
     const std::vector<std::string>& headers,

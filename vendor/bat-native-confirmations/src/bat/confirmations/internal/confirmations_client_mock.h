@@ -41,9 +41,6 @@ class ConfirmationsClientMock : public ConfirmationsClient {
   MOCK_METHOD1(LoadPublisherState, void(
       ledger::OnLoadCallback callback));
 
-  MOCK_METHOD1(LoadNicewareList, void(
-      ledger::GetNicewareListCallback callback));
-
   MOCK_METHOD2(SaveActivityInfo, void(
       ledger::PublisherInfoPtr publisher_info,
       ledger::PublisherInfoCallback callback));

@@ -257,7 +257,7 @@ class PageWallet extends React.Component<Props, State> {
       }
     }
 
-    if (walletRecoverySuccess) {
+    if (walletRecoverySuccess === 0) {
       const batFormatString = onlyAnonWallet ? getLocale('batPoints') : getLocale('bat')
 
       return {
@@ -745,6 +745,20 @@ class PageWallet extends React.Component<Props, State> {
     )
   }
 
+  getBackupErrorMessage = () => {
+    const { ui } = this.props.rewardsData
+    const { walletRecoverySuccess } = ui
+    if (walletRecoverySuccess === 1) {
+      return getLocale('walletRecoveryFail')
+    }
+
+    if (walletRecoverySuccess === 2) {
+      return getLocale('walletRecoveryOutdated')
+    }
+
+    return ''
+  }
+
   render () {
     const {
       recoveryKey,
@@ -754,7 +768,7 @@ class PageWallet extends React.Component<Props, State> {
       pendingContributionTotal
     } = this.props.rewardsData
     const { total } = balance
-    const { walletRecoverySuccess, emptyWallet, modalBackup, onlyAnonWallet } = ui
+    const { emptyWallet, modalBackup, onlyAnonWallet } = ui
 
     const pendingTotal = parseFloat((pendingContributionTotal || 0).toFixed(3))
 
@@ -810,7 +824,7 @@ class PageWallet extends React.Component<Props, State> {
               onSaveFile={this.onModalBackupOnSaveFile}
               onRestore={this.onModalBackupOnRestore}
               onVerify={this.onVerifyClick.bind(this, true)}
-              error={walletRecoverySuccess === false ? getLocale('walletRecoveryFail') : ''}
+              error={this.getBackupErrorMessage()}
             />
             : null
         }
