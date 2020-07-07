@@ -524,6 +524,7 @@ struct SKUTransaction {
 
 struct UrlResponse {
   string url;
+  int32 net_error;
   int32 status_code;
   string body;
   map<string, string> headers;

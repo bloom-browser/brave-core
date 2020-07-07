@@ -58,12 +58,14 @@ std::string UrlResponseToString(
       "\n[ RESPONSE - %s ]\n"
       "> Url: %s\n"
       "> Result: %s\n"
+      "> Net Error: %d\n"
       "> HTTP Code: %d\n"
       "> Body: %s"
       "%s",
       func,
       response.url.c_str(),
       result.c_str(),
+      response.net_error,
       response.status_code,
       response.body.c_str(),
       formatted_headers.c_str());
