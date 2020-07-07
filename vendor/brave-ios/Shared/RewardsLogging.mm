@@ -21,31 +21,31 @@ void LogMessage(const char* file,
   if (!g_rewards_client) {
     return;
   }
-  
+
   const auto filename = [NSString stringWithUTF8String:file];
-  
+
   [g_rewards_client.delegate logMessageWithFilename:filename
                                          lineNumber:line
                                           verbosity:verbose_level
                                             message:message];
 }
-  
+
 void Log(const char* file, int line, int verbose_level, NSString *format, ...) {
   if (!g_rewards_client) {
     return;
   }
-  
+
   const auto filename = [NSString stringWithUTF8String:file];
-  
+
   va_list args;
   va_start(args, format);
   NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
   va_end(args);
-  
+
   [g_rewards_client.delegate logMessageWithFilename:filename
                                          lineNumber:line
                                           verbosity:verbose_level
                                             message:message];
 }
-  
+
 } // namespace rewards

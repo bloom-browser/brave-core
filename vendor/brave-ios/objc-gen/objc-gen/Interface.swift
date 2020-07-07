@@ -15,7 +15,7 @@ struct Interface: Hashable, Comparable {
     let decleration: String
     /// The assignment string (This will be the r-value string placed inside a @implementaion)
     let assignmentString: String
-  
+
     /// Convert a snake case property name into an Obj-C camcelCase'd one (i.e. "opening_balance_"
     /// returns "openingBalance")
     static func formatted(name: String) -> String {

@@ -9,7 +9,7 @@ import Clang
  **objc-gen**
  Use libclang (https://clang.llvm.org/doxygen/group__CINDEX.html) to parse the AST of header
  files and output Obj-C (which can then be imported by Swift)
- 
+
  objc-gen requires the following dependencies:
   - Xcode (Defaults to being required at /Applications/Xcode.app, but can be changed in the Config)
   - LLVM (can be installed via `brew install llvm`)
@@ -22,9 +22,9 @@ import Clang
    - `Records+Private.h`: A private interface including init methods which take the mirrored C++
       struct as an argument. Used to create Obj-C structs from C++, and in the future, vice-versa
    - `Records.mm`: The Obj-C++ implementations
- 
+
  Currently only used for bat-native-ledger, but could be used for bat-native-ads as well
- 
+
  Note: `CppTransformations.h` contains helper methods between supported C++ classes/structs
  and an Obj-C type. I.e. `std::string` <-> `NSString`, `std::vector` <-> `NSArray`, and
  `std::map` <-> `NSDictionary` and is required to be included by the project importing the
@@ -49,7 +49,7 @@ final class Config {
 func generate(from files: [String], includePaths: [String], outputDirectory: String) {
   var enums: Set<Enum> = []
   var interfaces: Set<Interface> = []
-  
+
   func _traverse(nodes: [Cursor]) {
     for node in nodes where !node.children.isEmpty && node.isFromMainFile {
       switch node.kind {
@@ -68,7 +68,7 @@ func generate(from files: [String], includePaths: [String], outputDirectory: Str
       }
     }
   }
-  
+
   for file in files {
     let idx = clang_createIndex(0, 1)
     defer { clang_disposeIndex(idx) }
@@ -83,12 +83,12 @@ func generate(from files: [String], includePaths: [String], outputDirectory: Str
       print("Couldn't parse \(file)")
       continue
     }
-    
+
     _traverse(nodes: Cursor(clang_getTranslationUnitCursor(unit)).children)
   }
-  
+
   let sortedInterfaces = interfaces.sorted()
-  
+
   // We have to cheat a bit and force the export.h files to be at the top since a lot of files
   // in the ledger includes use `LEDGER_EXPORT` but not `#include "bat/ledger/export.h"
   let fudgedSortedFiles = files.sorted(by: { $0.contains("export.h") ? true : $0 < $1 })
@@ -102,14 +102,14 @@ func generate(from files: [String], includePaths: [String], outputDirectory: Str
     }
     return updatedPath
   }
-  
+
   let outputedFiles: [TemplateOutput] = [
     EnumHeaderOutput(enums: enums.sorted()),
     RecordsHeaderOutput(interfaces: sortedInterfaces),
     PrivateRecordsHeaderOutput(interfaces: sortedInterfaces, cppIncludes: cppIncludes),
     ImplementationSourceOutput(interfaces: sortedInterfaces)
   ]
-  
+
   do {
     try FileManager.default.createDirectory(atPath: outputDirectory, withIntermediateDirectories: true, attributes: nil)
     try outputedFiles.forEach {
@@ -138,7 +138,7 @@ do {
     .filter { $0.hasSuffix(".h") }
     .map { return "\(headersPath)/\($0)" }
   let outputPath = ledgerPath.appending("/Generated")
-  
+
   generate(from: filePaths, includePaths: [includePath], outputDirectory: outputPath)
   createBridge(from: "\(headersPath)/ledger_client.h", className: "LedgerClient", includePaths: [includePath], outputDirectory: outputPath)
 }
@@ -151,7 +151,7 @@ do {
 //    .filter { $0.hasSuffix(".h") }
 //    .map { return "\(headersPath)/\($0)" }
   let outputPath = adsPath.appending("/Generated")
-  
+
 //  generate(from: filePaths, includePaths: [includePath], outputDirectory: outputPath)
   createBridge(from: "\(headersPath)/ads_client.h", className: "AdsClient", includePaths: [includePath], outputDirectory: outputPath)
 }

@@ -20,21 +20,21 @@
     BLOG(0, @"Failed to load migration script from path: %@", bundlePath);
     return nil;
   }
-  
+
   const auto statements = [[NSMutableArray alloc] init];
-  
+
   // activity_info
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(ActivityInfo.class, ^(ActivityInfo *info){
     return [self activityInfoInsertFor:info];
   })];
-  
+
   // contribution_info
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(ContributionInfo.class, ^(ContributionInfo *info){
     return [self contributionInfoInsertFor:info];
   })];
-  
+
   // contribution_queue
   __block int64_t contributionQueueMaxID = 0;
   [statements addObjectsFromArray:
@@ -47,49 +47,49 @@
      [NSString stringWithFormat:@"UPDATE SQLITE_SEQUENCE SET seq = %lld WHERE name = 'contribution_queue';", contributionQueueMaxID]
      ];
   }
-  
+
   // contribution_queue_publishers
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(ContributionPublisher.class, ^(ContributionPublisher *obj){
     return [self contributionQueuePublisherInsertFor:obj];
   })];
-  
+
   // media_publisher_info
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(MediaPublisherInfo.class, ^(MediaPublisherInfo *obj){
     return [self mediaPublisherInfoInsertFor:obj];
   })];
-  
+
   // pending_contribution
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(PendingContribution.class, ^(PendingContribution *obj){
     return [self pendingContributionInsertFor:obj];
   })];
-  
+
   // promotion
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(Promotion.class, ^(Promotion *obj){
     return [self promotionInsertFor:obj];
   })];
-  
+
   // promotion_creds
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(PromotionCredentials.class, ^(PromotionCredentials *obj){
     return [self promotionCredsInsertFor:obj];
   })];
-  
+
   // publisher_info
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(PublisherInfo.class, ^(PublisherInfo *obj){
     return [self publisherInfoInsertFor:obj];
   })];
-  
+
   // recurring_donation
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(RecurringDonation.class, ^(RecurringDonation *obj){
     return [self recurringDonationInsertFor:obj];
   })];
-  
+
   // unblinded_tokens
   __block int64_t unblindedTokenMaxID = 0;
   [statements addObjectsFromArray:
@@ -102,7 +102,7 @@
      [NSString stringWithFormat:@"UPDATE SQLITE_SEQUENCE SET seq = %lld WHERE name = 'unblinded_tokens';", unblindedTokenMaxID]
      ];
   }
-  
+
   return [migrationScript stringByReplacingOccurrencesOfString:@"# {statements}" withString:[statements componentsJoinedByString:@"\n"]];
 }
 
@@ -115,21 +115,21 @@
     BLOG(0, @"Failed to load migration script from path: %@", bundlePath);
     return nil;
   }
-  
+
   const auto statements = [[NSMutableArray alloc] init];
-  
+
   // promotion
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(Promotion.class, ^(Promotion *obj){
     return [self promotionInsertFor:obj];
   })];
-  
+
   // promotion_creds
   [statements addObjectsFromArray:
    MapFetchedObjectsToInsertsForClass(PromotionCredentials.class, ^(PromotionCredentials *obj){
     return [self promotionCredsInsertFor:obj];
   })];
-  
+
   // unblinded_tokens
   __block int64_t unblindedTokenMaxID = 0;
   [statements addObjectsFromArray:
@@ -142,7 +142,7 @@
      [NSString stringWithFormat:@"UPDATE SQLITE_SEQUENCE SET seq = %lld WHERE name = 'unblinded_tokens';", unblindedTokenMaxID]
      ];
   }
-  
+
   return [migrationScript stringByReplacingOccurrencesOfString:@"# {statements}" withString:[statements componentsJoinedByString:@"\n"]];
 }
 
@@ -329,7 +329,7 @@
 + (void)deleteCoreDataServerPublisherList:(nullable void (^)(NSError * _Nullable error))completion
 {
   const auto context = [DataController newBackgroundContext];
-  
+
   BLOG(1, @"CoreData: Deleting publisher list");
   [context performBlock:^{
     const auto fetchRequest = ServerPublisherInfo.fetchRequest;
@@ -338,11 +338,11 @@
     NSError *error = nil;
     const auto deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
     [context executeRequest:deleteRequest error:&error];
-    
+
     if (!error && context.hasChanges) {
       [context save:&error];
     }
-    
+
     if (completion) {
       dispatch_async(dispatch_get_main_queue(), ^{
         completion(error);

@@ -60,7 +60,7 @@ static DataController *_dataController = nil;
   if ((self = [super init])) {
     self.operationQueue = [[NSOperationQueue alloc] init];
     self.operationQueue.maxConcurrentOperationCount = 1;
-    
+
     [[NSFileManager defaultManager] createDirectoryAtURL:[self storeDirectoryURL]
                              withIntermediateDirectories:YES
                                               attributes:nil

@@ -61,7 +61,7 @@
   const auto timerID = self.currentTimerID;
 
   auto const __weak weakSelf = self;
-    
+
   dispatch_async(dispatch_get_main_queue(), ^{
       self.timers[[NSNumber numberWithUnsignedInt:timerID]] =
       [NSTimer scheduledTimerWithTimeInterval:offset repeats:false block:^(NSTimer * _Nonnull timer) {
@@ -69,8 +69,8 @@
           timerFired(timerID);
       }];
   });
-    
-  
+
+
   return timerID;
 }
 
@@ -97,7 +97,7 @@
       [request setValue:value forHTTPHeaderField:name];
     }
   }
-  
+
   if (self.customUserAgent != nil &&
       self.customUserAgent.length > 0) {
     [request setValue:self.customUserAgent forHTTPHeaderField:@"User-Agent"];

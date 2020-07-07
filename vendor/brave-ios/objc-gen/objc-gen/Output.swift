@@ -32,11 +32,11 @@ final class EnumHeaderOutput: TemplateOutput {
   var generated: String {
     return """
     \(thisFileIsGeneratedString)
-    
+
     #import <Foundation/Foundation.h>
-    
+
     \(enums.map { $0.generated }.joined(separator: "\n\n"))
-    
+
     """
   }
 }
@@ -53,18 +53,18 @@ final class RecordsHeaderOutput: TemplateOutput {
   var generated: String {
     return  """
     \(thisFileIsGeneratedString)
-    
+
     #import <Foundation/Foundation.h>
     #import "Enums.h"
-    
+
     @class \(interfaces.map { $0.prefixedName }.joined(separator: ", "));
-    
+
     NS_ASSUME_NONNULL_BEGIN
-    
+
     \(interfaces.map { $0.generatedPublicInterface }.joined(separator: "\n\n"))
-    
+
     NS_ASSUME_NONNULL_END
-    
+
     """
   }
 }
@@ -83,14 +83,14 @@ final class PrivateRecordsHeaderOutput: TemplateOutput {
   var generated: String {
     return  """
     \(thisFileIsGeneratedString)
-    
+
     #import <Foundation/Foundation.h>
     #import "Records.h"
-    
+
     \(cppIncludes.map { "#include \"\($0)\"" }.joined(separator: "\n"))
-    
+
     \(interfaces.map { $0.generatedPrivateInterface }.joined(separator: "\n\n"))
-    
+
     """
   }
 }
@@ -107,17 +107,17 @@ final class ImplementationSourceOutput: TemplateOutput {
   var generated: String {
     return """
     \(thisFileIsGeneratedString)
-    
+
     #import "Records.h"
     #import "Records+Private.h"
     #import "CppTransformations.h"
-    
+
     #import <vector>
     #import <map>
     #import <string>
-    
+
     \(interfaces.map { $0.generatedImplementation }.joined(separator: "\n\n"))
-    
+
     """
   }
 }

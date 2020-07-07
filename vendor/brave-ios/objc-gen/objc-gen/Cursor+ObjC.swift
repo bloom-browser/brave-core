@@ -23,7 +23,7 @@ extension Cursor {
   struct NoObjCTransformError: Error {
     let cursor: Cursor
   }
-  
+
   private func _objCType(for type: CXType, inObject: Bool) throws -> String {
     let typeString = clang_getTypeSpelling(type).stringAndDisposeAfter
     switch type.kind {
@@ -77,7 +77,7 @@ extension Cursor {
     }
     throw NoObjCTypeError(cursor: cursor, type: type)
   }
-  
+
   /// Get the type to be used in an Obj-C interface. The type used may differ depending on if the
   /// type is used within an object (I.e. A property can be an `int`, but stored within an Obj-C
   /// storage type (i.e. `NSArray`), it must be an NSNumber
@@ -86,7 +86,7 @@ extension Cursor {
     let type = clang_getCursorType(cursor)
     return try _objCType(for: type, inObject: inObject)
   }
-  
+
   /// Get an Obj-C implementation property assignment r-value string for this cursor.
   /// - throws: NoObjCTypeError
   func objCAssignmentRValueString(_ accessingObjName: String = "obj") throws -> String {

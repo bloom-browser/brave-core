@@ -9,4 +9,3 @@ typedef NSString *BATWalletType NS_SWIFT_NAME(WalletType) NS_STRING_ENUM;
 static BATWalletType const BATWalletTypeUphold = @"uphold";
 static BATWalletType const BATWalletTypeAnonymous = @"anonymous";
 static BATWalletType const BATWalletTypeUnblindedTokens = @"blinded";
-

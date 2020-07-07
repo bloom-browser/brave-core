@@ -1,6 +1,6 @@
 //
 //  Promotion+CoreDataClass.h
-//  
+//
 //
 //  Created by Kyle Hickinson on 2019-10-21.
 //

@@ -65,7 +65,7 @@
   self.ads.allowSubdivisionTargeting = YES;
   self.ads.subdivisionTargetingCode = @"US-FL";
   self.ads.automaticallyDetectedSubdivisionTargetingCode = @"US-CA";
-  
+
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     BATBraveAds *secondAds = [[BATBraveAds alloc] initWithStateStoragePath:[self stateStoragePath]];
     XCTAssertEqual(self.ads.enabled, secondAds.enabled);
@@ -74,10 +74,10 @@
     XCTAssertEqual(self.ads.allowSubdivisionTargeting, secondAds.allowSubdivisionTargeting);
     XCTAssert([self.ads.subdivisionTargetingCode isEqualToString:secondAds.subdivisionTargetingCode]);
     XCTAssert([self.ads.automaticallyDetectedSubdivisionTargetingCode isEqualToString:secondAds.automaticallyDetectedSubdivisionTargetingCode]);
-    
+
     [expect fulfill];
   });
-  
+
   [self waitForExpectations:@[expect] timeout: 4.0];
 }
 

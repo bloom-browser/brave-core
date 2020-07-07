@@ -61,7 +61,7 @@ NS_INLINE NSArray<NSNumber *> *NSArrayFromVector(std::vector<T> v) {
   const auto method = class_getClassMethod(NSNumber.class, selector);
   typedef NSNumber *(*NSNumberCall)(id,SEL,T);
   NSNumberCall call = (NSNumberCall)method_getImplementation(method);
-  
+
   for (auto t : v) {
     NSNumber *number = (NSNumber *)call(NSNumber.class, selector, t);
     [a addObject:number];
@@ -82,7 +82,7 @@ NS_INLINE std::vector<T> VectorFromNSArray(NSArray<NSNumber *> *a) {
   const auto method = class_getInstanceMethod(NSNumber.class, selector);
   typedef T(*NSNumberCall)(id,SEL);
   NSNumberCall call = (NSNumberCall)method_getImplementation(method);
-  
+
   for (NSNumber *number in a) {
     v.push_back(call(number, selector));
   }
