@@ -159,7 +159,6 @@ generate_jni("jni_headers") {
   if (enable_brave_sync ) {
     sources += [
       "//brave/android/java/org/chromium/chrome/browser/BraveSyncWorker.java",
-      "//brave/android/java/org/chromium/chrome/browser/sync/BraveAndroidSyncSettings.java",
       "//brave/android/java/org/chromium/chrome/browser/sync/BraveSyncDevices.java",
     ]
   }
