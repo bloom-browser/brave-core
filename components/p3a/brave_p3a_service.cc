@@ -80,6 +80,7 @@ constexpr const char* kCollectedHistograms[] = {
 
     // P2A
     "Brave.P2A.Test",
+    "Brave.P2A.ViewConfirmationCount",
 };
 
 bool IsSuspendedMetric(base::StringPiece metric_name,
