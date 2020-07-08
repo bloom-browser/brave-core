@@ -1,0 +1,28 @@
+diff --git a/extensions/common/api/_api_features.json b/extensions/common/api/_api_features.json
+index 9cc9ff8bf54a23ba0a97427f06f643986cd73fb4..11cde3a7a8fc8e19a91d011c892e89f30a7e6d20 100644
+--- a/extensions/common/api/_api_features.json
++++ b/extensions/common/api/_api_features.json
+@@ -498,7 +498,7 @@
+       "content_script"
+     ]
+   },
+-  "runtime.sendMessage": {
++  "runtime.sendMessage": [{
+     // Everything except WebUI.
+     "contexts": [
+       "blessed_web_page",
+@@ -509,7 +509,13 @@
+       "web_page"
+     ],
+     "matches": ["<all_urls>"]
+-  },
++  }, {
++    "channel": "stable",
++    "contexts": ["webui"],
++    "matches": [
++      "chrome://newtab/*"
++    ]
++  }],
+   "runtime.sendNativeMessage": {
+     "dependencies": ["permission:nativeMessaging"],
+     "contexts": ["blessed_extension"]
