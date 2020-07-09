@@ -34,9 +34,10 @@ base::string16 BraveDownloadItemModel::GetTooltipText() {
 
   if (!origin_url.empty()) {
     tooltip += base::ASCIIToUTF16("\n");
-    if (!is_secure)
-      tooltip = l10n_util::GetStringUTF16(IDS_NOT_SECURE_VERBOSE_STATE) +
-                base::char16(' ');
+    if (!is_secure) {
+      tooltip += l10n_util::GetStringUTF16(IDS_NOT_SECURE_VERBOSE_STATE) +
+                 base::char16(' ');
+    }
     tooltip += origin_url;
   }
 

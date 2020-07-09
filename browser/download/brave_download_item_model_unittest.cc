@@ -135,9 +135,8 @@ TEST_F(BraveDownloadItemModelTest, GetTooltipText) {
     const TestCase& test_case = kTestCases[i];
     EXPECT_CALL(item(), GetURL())
         .WillRepeatedly(ReturnRefOfCopy(GURL(test_case.url)));
-    EXPECT_TRUE(
-        base::LowerCaseEqualsASCII(base::UTF16ToUTF8(model().GetTooltipText()),
-                                   test_case.expected_tooltip));
+    EXPECT_EQ(base::ToLowerASCII(base::UTF16ToUTF8(model().GetTooltipText())),
+              test_case.expected_tooltip);
     Mock::VerifyAndClearExpectations(&item());
   }
 }
