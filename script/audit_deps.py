@@ -21,7 +21,7 @@ EXCLUDE_PATHS = [
     os.path.join('vendor', 'brave-extension', 'node_modules'),
 ]
 
-whitelisted_advisories = [
+ignored_npm_advisories = [
     1523,  # Remove when https://github.com/brave/brave-browser/issues/10584 is resolved
 ]
 
@@ -91,7 +91,7 @@ def npm_audit_deps(path, args):
     for i, val in enumerate(result['actions']):
         result['actions'][i]['resolves'] = \
             [d for d in result['actions'][i]['resolves'] if
-                d['id'] not in whitelisted_advisories]
+                d['id'] not in ignored_npm_advisories]
 
     resolutions, non_dev_exceptions = extract_resolutions(result)
 
