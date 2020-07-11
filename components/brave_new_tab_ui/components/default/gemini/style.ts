@@ -457,3 +457,36 @@ export const TradeSwitch = styled<StyleProps, 'div'>('div')`
   cursor: pointer;
   color: ${p => p.isActive ? '#EEEEEE' : '#8F8F8F'};
 `
+
+export const DisconnectWrapper = styled<{}, 'div'>('div')`
+  padding-top: 75px;
+  min-height: 250px;
+  text-align: center;
+  max-width: 240px;
+`
+
+export const Title = styled<{}, 'span'>('span')`
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+`
+
+export const DisconnectTitle = styled(Title)`
+  font-size: 14px;
+  max-width: 245px;
+  margin: 0 auto;
+  line-height: 18px;
+`
+
+export const DisconnectCopy = styled(Copy)`
+  color: #fff;
+  max-width: 220px;
+  line-height: 17px;
+  margin: 8px auto 15px auto;
+`
+
+export const DisconnectButton = styled(GenButton)`
+  background: #AA1212;
+  color: #fff;
+  padding: 5px 20px;
+`

@@ -76,6 +76,18 @@ class GeminiGetDepositInfoFunction :
   ResponseAction Run() override;
 };
 
+class GeminiRevokeTokenFunction :
+    public ExtensionFunction {
+ public:
+  DECLARE_EXTENSION_FUNCTION("gemini.revokeToken", UNKNOWN)
+
+ protected:
+  ~GeminiRevokeTokenFunction() override {}
+  void OnRevokeToken(bool success);
+
+  ResponseAction Run() override;
+};
+
 }  // namespace api
 }  // namespace extensions
 

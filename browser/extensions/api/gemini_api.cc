@@ -168,5 +168,27 @@ void GeminiGetDepositInfoFunction::OnGetDepositInfo(
       std::make_unique<base::Value>(deposit_address)));
 }
 
+ExtensionFunction::ResponseAction
+GeminiRevokeTokenFunction::Run() {
+  if (!IsGeminiAPIAvailable(browser_context())) {
+    return RespondNow(Error("Not available in Tor/incognito/guest profile"));
+  }
+
+  auto* service = GetGeminiService(browser_context());
+  bool request = service->RevokeAccessToken(base::BindOnce(
+          &GeminiRevokeTokenFunction::OnRevokeToken, this));
+
+  if (!request) {
+    return RespondNow(
+        Error("Could not revoke gemini access tokens"));
+  }
+
+  return RespondLater();
+}
+
+void GeminiRevokeTokenFunction::OnRevokeToken(bool success) {
+  Respond(OneArgument(std::make_unique<base::Value>(success)));
+}
+
 }  // namespace api
 }  // namespace extensions

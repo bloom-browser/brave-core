@@ -61,7 +61,11 @@ import {
   Dropdown,
   AssetDropdownLabel,
   TradeSwitchWrapper,
-  TradeSwitch
+  TradeSwitch,
+  DisconnectButton,
+  DisconnectWrapper,
+  DisconnectTitle,
+  DisconnectCopy,
 } from './style'
 import {
   SearchIcon,
@@ -98,6 +102,7 @@ interface Props {
   assetAddressQRCodes: Record<string, string>
   accountBalances: Record<string, string>
   tickerPrices: Record<string, string>
+  disconnectInProgress: boolean
   onShowContent: () => void
   onDisableWidget: () => void
   onValidAuthCode: () => void
@@ -106,6 +111,8 @@ interface Props {
   onSetSelectedView: (view: string) => void
   onGeminiClientUrl: (url: string) => void
   onSetHideBalance: (hide: boolean) => void
+  onDisconnectGemini: () => void
+  onCancelDisconnect: () => void
 }
 
 class Gemini extends React.PureComponent<Props, State> {
@@ -191,11 +198,26 @@ class Gemini extends React.PureComponent<Props, State> {
     this.props.onConnectGemini()
   }
 
+  cancelDisconnect = () => {
+    this.props.onCancelDisconnect()
+  }
+
+  finishDisconnect = () => {
+    this.clearIntervals()
+    chrome.gemini.revokeToken(() => {
+      this.props.onDisconnectGemini()
+      this.cancelDisconnect()
+    })
+  }
+
   renderIndexView () {
     const { currentQRAsset } = this.state
+    const { disconnectInProgress } = this.props
 
     if (currentQRAsset) {
-      this.renderQRView()
+      return this.renderQRView()
+    } else if (disconnectInProgress) {
+      return this.renderDisconnectView()
     }
 
     return false
@@ -304,6 +326,25 @@ class Gemini extends React.PureComponent<Props, State> {
           className={`crypto-icon icon-${key}`}
         />
       </AssetIconWrapper>
+    )
+  }
+
+  renderDisconnectView = () => {
+    return (
+      <DisconnectWrapper>
+        <DisconnectTitle>
+          {getLocale('binanceWidgetDisconnectTitle')}
+        </DisconnectTitle>
+        <DisconnectCopy>
+          {getLocale('binanceWidgetDisconnectText')}
+        </DisconnectCopy>
+        <DisconnectButton onClick={this.finishDisconnect}>
+          {getLocale('binanceWidgetDisconnectButton')}
+        </DisconnectButton>
+        <DismissAction onClick={this.cancelDisconnect}>
+          {getLocale('binanceWidgetCancelText')}
+        </DismissAction>
+      </DisconnectWrapper>
     )
   }
 
@@ -445,7 +486,7 @@ class Gemini extends React.PureComponent<Props, State> {
 
   toggleCurrentTradeMode = () => {
     const { currentTradeMode } = this.state
-    const newMode = currentTradeMode === 'buy' ? 'sell' : 'boy'
+    const newMode = currentTradeMode === 'buy' ? 'sell' : 'buy'
     this.setState({
       currentTradeMode: newMode
     })

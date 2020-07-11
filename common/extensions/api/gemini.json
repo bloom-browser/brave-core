@@ -104,6 +104,23 @@
               ]
             }
           ]
+        },
+        {
+          "name": "revokeToken",
+          "type": "function",
+          "description": "Revokes the current access and refresh tokens",
+          "parameters": [
+            {
+              "type": "function",
+              "name": "callback",
+              "parameters": [
+                {
+                  "name": "success",
+                  "type": "boolean"
+                }
+              ]
+            }
+          ]
         }
       ],
       "types": [
