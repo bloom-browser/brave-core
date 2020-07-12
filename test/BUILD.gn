@@ -417,6 +417,8 @@ test("brave_unit_tests") {
 
 if (!is_android && !is_ios) {
 test("brave_installer_unittests") {
+  # Remove when https://github.com/brave/brave-browser/issues/10613 is resolved
+  check_includes = false
   deps = [
     "//base/test:run_all_unittests",
     "//base/test:test_support",
