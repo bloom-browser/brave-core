@@ -83,7 +83,7 @@ public abstract class BraveActivity<C extends ChromeActivityComponent> extends C
     public static final String ADD_FUNDS_URL = "chrome://rewards/#add-funds";
     public static final String REWARDS_SETTINGS_URL = "chrome://rewards/";
     public static final String REWARDS_AC_SETTINGS_URL = "chrome://rewards/contribute";
-    public static final String REWARDS_LEARN_MORE_URL = "https://brave.com/faq-rewards/#unclaimed-funds";
+    public static final String REWARDS_LEARN_MORE_URL = "https://bloombrowser.com/faq-rewards/#unclaimed-funds";
     private static final String PREF_CLOSE_TABS_ON_EXIT = "close_tabs_on_exit";
     public static final String OPEN_URL = "open_url";
 
@@ -92,10 +92,10 @@ public abstract class BraveActivity<C extends ChromeActivityComponent> extends C
     /**
      * Settings for sending local notification reminders.
      */
-    public static final String CHANNEL_ID = "com.brave.browser";
+    public static final String CHANNEL_ID = "com.bloom.browser";
     public static final String ANDROID_SETUPWIZARD_PACKAGE_NAME = "com.google.android.setupwizard";
     public static final String ANDROID_PACKAGE_NAME = "android";
-    public static final String BRAVE_BLOG_URL = "http://www.brave.com/blog";
+    public static final String BRAVE_BLOG_URL = "http://www.bloombrowser.com/blog";
 
     public BraveActivity() {
         // Disable key checker to avoid asserts on Brave keys in debug
@@ -247,8 +247,8 @@ public abstract class BraveActivity<C extends ChromeActivityComponent> extends C
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Brave Browser";
-            String description = "Notification channel for Brave Browser";
+            CharSequence name = "Bloom Browser";
+            String description = "Notification channel for Bloom Browser";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);

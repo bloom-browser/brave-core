@@ -12,37 +12,37 @@ import YouTubeFavicon from '../../img/newtab/defaultTopSitesIcon/youtube.png'
 export const defaultTopSitesData = [
   {
     name: 'App Store',
-    url: 'https://itunes.apple.com/app/brave-browser-fast-adblocker/id1052879175?mt=8',
+    url: 'https://itunes.apple.com/app/bloom-browser-fast-adblocker/id1052879175?mt=8',
     favicon: AppStoreFavicon,
     background: 'rgba(255,255,255,0.8)'
   },
   {
     name: 'Brave Software',
-    url: 'https://brave.com',
+    url: 'https://bloombrowser.com',
     favicon: BraveFavicon,
     background: 'rgba(255,255,255,0.8)'
   },
   {
     name: 'Facebook',
-    url: 'https://www.facebook.com/BraveSoftware/',
+    url: 'https://www.facebook.com/BloomSoftware/',
     favicon: FacebookFavicon,
     background: 'rgba(255,255,255,0.8)'
   },
   {
     name: 'Play Store',
-    url: 'https://play.google.com/store/apps/details?id=com.brave.browser&hl=en_US',
+    url: 'https://play.google.com/store/apps/details?id=com.bloom.browser&hl=en_US',
     favicon: PlayStoreFavicon,
     background: 'rgba(255,255,255,0.8)'
   },
   {
     name: 'Twitter',
-    url: 'https://twitter.com/brave',
+    url: 'https://twitter.com/bloom',
     favicon: TwitterFavicon,
     background: 'rgba(255,255,255,0.8)'
   },
   {
     name: 'YouTube',
-    url: 'https://www.youtube.com/bravesoftware',
+    url: 'https://www.youtube.com/bloomsoftware',
     favicon: YouTubeFavicon,
     background: 'rgba(255,255,255,0.8)'
   }

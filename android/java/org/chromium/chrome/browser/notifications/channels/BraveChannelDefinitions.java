@@ -18,11 +18,11 @@ import java.util.Set;
 
 public class BraveChannelDefinitions {
     public class ChannelId {
-        public static final String BRAVE_ADS = "com.brave.browser.ads";
-        public static final String BRAVE_ADS_BACKGROUND = "com.brave.browser.ads.background";
+        public static final String BRAVE_ADS = "com.bloom.browser.ads";
+        public static final String BRAVE_ADS_BACKGROUND = "com.bloom.browser.ads.background";
 	}
 
-    public class ChannelGroupId { public static final String BRAVE_ADS = "com.brave.browser.ads"; }
+    public class ChannelGroupId { public static final String BRAVE_ADS = "com.bloom.browser.ads"; }
 
     static protected void addBraveChannels(
             Map<String, PredefinedChannel> map, Set<String> startup) {
