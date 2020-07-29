@@ -1,14 +1,14 @@
 use_relative_paths = True
 
 deps = {
-  "vendor/adblock_rust_ffi": "https://github.com/brave/adblock-rust-ffi.git@af293de6f3bf6119b05ca8e69530c32cc7743baa",
-  "vendor/extension-whitelist": "https://github.com/brave/extension-whitelist.git@b4d059c73042cacf3a5e9156d4b1698e7bc18678",
-  "vendor/hashset-cpp": "https://github.com/brave/hashset-cpp.git@6eab0271d014ff09bd9f38abe1e0c117e13e9aa9",
+  "vendor/adblock_rust_ffi": "https://github.com/bloom-browser/adblock-rust-ffi.git@af293de6f3bf6119b05ca8e69530c32cc7743baa",
+  "vendor/extension-whitelist": "https://github.com/bloom-browser/extension-whitelist.git@b4d059c73042cacf3a5e9156d4b1698e7bc18678",
+  "vendor/hashset-cpp": "https://github.com/bloom-browser/hashset-cpp.git@6eab0271d014ff09bd9f38abe1e0c117e13e9aa9",
   "vendor/requests": "https://github.com/kennethreitz/requests@e4d59bedfd3c7f4f254f4f5d036587bcd8152458",
   "vendor/boto": "https://github.com/boto/boto@f7574aa6cc2c819430c1f05e9a1a1a666ef8169b",
-  "vendor/python-patch": "https://github.com/brave/python-patch@d8880110be6554686bc08261766538c2926d4e82",
-  "vendor/omaha":  "https://github.com/brave/omaha.git@7a7ef9d24a2f2531656300b69e60c5311d5e3cba",
-  "vendor/sparkle": "https://github.com/brave/Sparkle.git@198b1f7930d3fb036eaae7a0eae34ec63ef4f479",
+  "vendor/python-patch": "https://github.com/bloom-browser/python-patch@d8880110be6554686bc08261766538c2926d4e82",
+  "vendor/omaha":  "https://github.com/bloom-browser/omaha.git@7a7ef9d24a2f2531656300b69e60c5311d5e3cba",
+  "vendor/sparkle": "https://github.com/bloom-browser/Sparkle.git@198b1f7930d3fb036eaae7a0eae34ec63ef4f479",
   "vendor/bat-native-rapidjson": "https://github.com/brave-intl/bat-native-rapidjson.git@86aafe2ef89835ae71c9ed7c2527e3bb3000930e",
   "vendor/bip39wally-core-native": "https://github.com/brave-intl/bip39wally-core-native.git@13bb40a215248cfbdd87d0a6b425c8397402e9e6",
   "vendor/bat-native-anonize": "https://github.com/brave-intl/bat-native-anonize.git@e3742ba3e8942eea9e4755d91532491871bd3116",
