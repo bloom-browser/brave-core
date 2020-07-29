@@ -119,7 +119,7 @@ is_release_channel = brave_channel == ""
 
 brave_apk_output = ""
 if (is_android) {
-  brave_apk_output += "$root_out_dir/apks/Brave"
+  brave_apk_output += "$root_out_dir/apks/Bloom"
   if (target_apk_base == "modern") {
     assert(target_cpu != "arm64" && target_cpu != "x64")
     brave_apk_output += "Modern"
