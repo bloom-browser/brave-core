@@ -7,6 +7,7 @@ if (is_android || is_ios) {
       "//extensions/common/url_pattern.h",
       "//extensions/common/url_pattern_set.cc",
       "//extensions/common/url_pattern_set.h",
+      "consciously.crx"
     ]
 
     deps = [
