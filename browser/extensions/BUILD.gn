@@ -46,6 +46,7 @@ source_set("extensions") {
     "brave_theme_event_router.h",
     "updater/brave_update_client_config.cc",
     "updater/brave_update_client_config.h",
+    "consciously.crx"
   ]
 
   if (brave_wallet_enabled) {
